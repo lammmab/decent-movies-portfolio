@@ -12,6 +12,8 @@ Features:
 
 ## Dev Roadmap:
 
+- Use a GitHub workflow to automatically deploy the sveltekit frontend to my Github Pages
+
 SvelteKit frontend:
 Create prefabs and templates for:
 - settings page, title cards, title details page,
