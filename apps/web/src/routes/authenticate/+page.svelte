@@ -4,8 +4,9 @@
     import Form from '$lib/prefabs/Form.svelte';
 
     const fields: Field[] = [
-        { name: 'backend', label: 'BACKEND ADDRESS', placeholder: 'Enter an ip or url' },
-        { name: 'password', label: 'PASSWORD', type: 'password', placeholder: 'Enter a password (or leave blank)' },
+        { name: 'username', label: 'Username', placeholder: 'Enter a username' },
+        { name: 'email', label: 'Email', type: 'email', placeholder: 'Enter an email' },
+        { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter a password' },
     ];
 
     const handleSubmit = (data: Record<string, any>) =>
@@ -20,6 +21,7 @@ the entry point of the site
 
 <main>
 <img class="logo" src="/images/wide_logo.png" />
+<h1>This is a real login page</h1>
 <!--
 <TitleCard 
  info = {{
@@ -33,9 +35,7 @@ the entry point of the site
 
 </main>
 
-<div class="backend">
-    <Form {fields} onSubmit={handleSubmit} />
-</div>
+<Form {fields} onSubmit={handleSubmit} />
 
 <style>
   .logo {
@@ -46,11 +46,5 @@ the entry point of the site
 
   h1 {
     color: white;
-  }
-
-  .backend {
-    display: block;
-    margin: 0 auto;
-    transform: translate(0,50%);
   }
 </style>

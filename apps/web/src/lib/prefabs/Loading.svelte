@@ -1,4 +1,10 @@
-<!-- src/lib/Loading.svelte -->
+<!-- src/lib/prefabs/Loading.svelte -->
+<!--
+Show the loading page:
+<Loading
+    message="Loading content"
+/>
+-->
 <script>
   export let message = "Loading...";
 </script>

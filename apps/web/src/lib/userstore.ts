@@ -1,43 +1,10 @@
-import { writable } from 'svelte/store';
-
-// user data
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  avatarUrl?: string;
-  isAdmin: boolean;
-}
-
-export function testUser() {
-  let user: User = {
-    id: 0,
-    name: 'Test User',
-    email: 'example@gmail.com',
-    isAdmin: true,
-    avatarUrl: '/images/default_avatar.png'
-  }
-  return user;
-}
+import {User,Session} from './constants.ts';
 
 // contact decentralized backend and check if email in list of admins 
 function isAdmin(user: User) {
 
 }
 
-export class Session {
-  user: User;
-  token: string;
-  startedAt?: Date;
-  expiresAt?: Date;
-
-  constructor(user: User, token: string, time: Date, maxDuration: number) {
-    this.user = user;
-    this.token = token;
-    this.startedAt = time;
-    this.expiresAt = new Date(this.startedAt.getTime() + (maxDuration*1000));
-  }
-}
 
 // contact centralized login server and attempt to create an account 
 export function createUser(username: string, email: string,password: string) {
