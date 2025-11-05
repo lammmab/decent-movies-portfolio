@@ -9,7 +9,7 @@
     ];
 
     const handleSubmit = (data: Record<string, any>) =>
-        alert('Submitted: ', data);
+        console.log(data);
 </script>
 <!--
 +page.svelte
@@ -19,7 +19,7 @@ the entry point of the site
 -->
 
 <main>
-<img class="logo" src="/images/wide_logo.png" />
+<img class="logo" src="/images/wide_logo.png" alt="Logo" />
 <!--
 <TitleCard 
  info = {{
@@ -51,6 +51,6 @@ the entry point of the site
   .backend {
     display: block;
     margin: 0 auto;
-    transform: translate(0,50%);
+    transform: translate(0,75%);
   }
 </style>

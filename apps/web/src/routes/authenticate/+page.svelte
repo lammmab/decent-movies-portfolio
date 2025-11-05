@@ -10,32 +10,17 @@
     ];
 
     const handleSubmit = (data: Record<string, any>) =>
-        alert('Submitted: ', data);
+        console.log('Submitted: ', data);
 </script>
-<!--
-+page.svelte
-the entry point of the site
-- displays backend connection prompt if there's no user account, OR if the user account has no saved backends
-- attempts to connect to backends with a test handshake, optionally a backend password
--->
 
 <main>
 <img class="logo" src="/images/wide_logo.png" />
-<h1>This is a real login page</h1>
-<!--
-<TitleCard 
- info = {{
-    title_name: "Test Title",
-    type: 2,
-    display_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT7oXKTplqRxYMZqclB1V4N0xJVSEU7zqBRdiU_tfu1BRhUrmUrnTnuWf66YQ8t_eEnaM-g&s=10"
-  }}
-
-/>
--->
-
+<hr>
+<h1>Log in</h1>
+<Form {fields} onSubmit={handleSubmit} />
 </main>
 
-<Form {fields} onSubmit={handleSubmit} />
+
 
 <style>
   .logo {
@@ -46,5 +31,12 @@ the entry point of the site
 
   h1 {
     color: white;
+    text-align: center;
+    font-family: 'NeoSansRegular';
+  }
+
+  hr {
+    border: none;
+    margin-top: 5%;
   }
 </style>

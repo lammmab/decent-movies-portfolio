@@ -9,6 +9,7 @@
   import { AlertType, noUser } from "$lib/constants.ts";
   import Topbar from "$lib/prefabs/Topbar.svelte";
   import Alert from "$lib/prefabs/Alert.svelte";
+  import "$lib/app.css";
 
   let { children } = $props();
 

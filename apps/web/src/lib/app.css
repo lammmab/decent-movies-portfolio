@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'NeoSansBlack';
+  src: url('/otf/NeoSansBlack.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NeoSansRegular';
+  src: url('/otf/NeoSansRegular.otf') format('opentype');
+}

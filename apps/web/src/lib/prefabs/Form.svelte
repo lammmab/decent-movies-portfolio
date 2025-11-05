@@ -24,7 +24,7 @@
           id={f.name}
           placeholder={f.placeholder}
           on:input={(e) => handleChange(e, f.name)}
-        />
+        ></textarea>
 
       {:else if f.type === 'select'}
         <select id={f.name} on:change={(e) => handleChange(e, f.name)}>
@@ -66,7 +66,7 @@
 
   .label {
     color: white;
-    font-family: fantasy;
+    font-family: 'NeoSansBlack';
   }
 
   input, textarea, select {
@@ -77,7 +77,7 @@
     margin-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.3);
     border-color: rgba(255,255,255,0.1);
-    font-family: fantasy;
+    font-family: 'NeoSansRegular';
     color: white;
   }
   input:focus {
@@ -97,6 +97,8 @@
     width: 40%;
     display: block;
     margin: 0 auto;
+    scale: 1;
+    transition: scale 0.3s ease;
   }
-  button:hover { background: #1e4fd1; }
+  button:hover { scale: 1.1; background: #1e4fd1; }
 </style>

@@ -1,19 +1,64 @@
 <!-- src/lib/prefabs/Topbar.svelte -->
-<script lang="ts">
-  import type { User } from '$lib/constants.ts';
-  export let user: User | null = null;
-</script>
 
 <div class="topbar">
   {#if user}
-    <img src={user.avatarUrl} alt="User Avatar" />
-    <span class="userText">{user.name}</span>
-  {:else}
-    <span>Loading...</span>
+    <button on:click={accountButton} class="account_button">
+      <img src={user.avatarUrl} alt="User Avatar" />
+      <span class="userText">{user.name}</span>
+    </button>
+
   {/if}
 </div>
 
+<Pulldown bind:this={pulldown} 
+  offset=60
+  options={menuOptions}
+/>
+
+<script lang="ts">
+  import type { User,Option } from '$lib/constants.ts';
+  import Pulldown from './Pulldown.svelte';
+  import { goto } from '$app/navigation';
+
+  let pulldown: Pulldown
+  function log() {
+    console.log("Hi");
+  }
+
+  const menuOptions: Option[] = [
+		{ label: 'Backend Plugins', callback: log },
+		{ label: 'Settings', callback: log },
+		{ label: 'Log out', callback: log }
+	];
+
+  export let user: User | null = null;
+  function accountButton() {
+    if (user?.id != -1) {
+      pulldown.toggle()
+    } else {
+      goto("/authenticate")
+    }
+  }
+</script>
+
+
 <style>
+  .account_button {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: none;
+    border: none;
+    cursor: pointer;
+    scale: 1;
+    transition: scale 0.3s ease;
+  }
+
+  .account_button:hover {
+    scale: 1.1;
+  }
+
   .topbar {
     position: fixed;
     top: 0;
@@ -29,8 +74,9 @@
 
   .userText {
     color: #fff;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'NeoSansRegular';
     margin-left: 1%;
+
   }
 
   img {

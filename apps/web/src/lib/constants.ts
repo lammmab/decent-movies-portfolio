@@ -38,6 +38,11 @@ export type Field = {
     options?: { label: string; value: string }[];
 };
 
+export type Option = {
+    label: string;
+    callback: (event: MouseEvent) => void;
+}
+
 export class Session {
   user: User;
   token: string;
