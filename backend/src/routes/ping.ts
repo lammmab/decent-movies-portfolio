@@ -5,5 +5,5 @@ function route(req: Request,res: Response) {
     res.json({ message: 'pong' });
 }
 
-export let pingRoute: Route = new Route('ping',route)
+export let ping: Route = new Route('ping',route)
 

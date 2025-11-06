@@ -1,6 +1,6 @@
 import { FolderRouter } from "./routing";
 
-import {errorHandler} from "../middleware/errorHandler";
+import {errorHandler} from "../middleware/error_handler";
 import express,{Express} from 'express';
 
 const app: Express = express();
