@@ -5,9 +5,9 @@
     import TitleRow from "$lib/prefabs/TitleRow.svelte";
 
     const title: Title = {
-        title_name: "The Amazing World of Gumball",
+        title_name: "Amazing Title",
         type: 2,
-        display_url: "https://i0.wp.com/www.thewrap.com/wp-content/uploads/2021/09/The-Amazing-World-of-Gumball.jpg?fit=990%2C557&quality=89&ssl=1"
+        display_url: "https://i.ytimg.com/vi/qchR_voCF0s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDFtCKdcqEqT7Gz88p6a35knc3Atw"
     }
 
     const fields: Field[] = [
@@ -52,7 +52,7 @@ the entry point of the site
     .home {
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* children keep their natural width */
+        align-items: flex-start;
         min-height: calc(100vh - 100px);
     }
 

@@ -141,7 +141,6 @@ const title: Title = {
     }
 
     .title-card {
-        all: unset;
         flex-shrink: 0;
     }
 

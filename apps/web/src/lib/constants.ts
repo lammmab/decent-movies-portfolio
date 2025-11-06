@@ -60,7 +60,7 @@ export class Session {
 export function noUser() {
   let user: User = {
     id: -1,
-    name: 'Logged Out',
+    name: 'Username',
     email: 'none',
     avatarUrl: '/images/default_avatar.png'
   }

@@ -20,7 +20,7 @@
         background: #eee;
         border-radius: 0.5rem;
         height: 20vw;
-        min-height: 300px;
+        height: clamp(150px, 20vw, 300px);
 
         cursor: pointer;
         border: 2px solid transparent;
@@ -38,6 +38,8 @@
     .title-image {
         border-radius: 0.5rem;
         width: 100%; height: 100%;
+        display: block;
+        object-fit: cover;
     }
 
     .title-info {

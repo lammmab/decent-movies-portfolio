@@ -1,5 +1,6 @@
 # Decentralized Movies
 The final portfolio project version of my decentralized movies repository
+![First demo](demonstrations/demo-1.gif)
 
 ## Description
 Decentralized movies is a full-stack, decentralized movie platform written entirely by me.
