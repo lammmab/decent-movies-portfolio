@@ -1,6 +1,6 @@
-const { config } = require("./config.ts");
-const { app } = require("./app.ts");
+import { setup } from "./types/setup_globals";
+setup();
 
-app.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`);
-});
+import router from "./server/app";
+
+router.go();

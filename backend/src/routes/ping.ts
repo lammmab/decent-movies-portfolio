@@ -1,10 +1,9 @@
-import { Router, Request, Response } from 'express';
-const { Route } = require("../routing.ts");
+import {Route} from '../server/routing';
+import {Request,Response} from 'express';
 
-const router = Router();
+function route(req: Request,res: Response) {
+    res.json({ message: 'pong' });
+}
 
-router.post('/', (req: Request, res: Response) => {
-  res.json({ message: 'Authenticated!' });
-});
+export let pingRoute: Route = new Route('ping',route)
 
-export const pingRoute = new Route('authenticate', router);

@@ -19,6 +19,7 @@ export interface Title {
 }
 
 export type Config = {
+    debug: boolean
     port: number;
     plugins_dir: string;
     whitelisted: boolean;

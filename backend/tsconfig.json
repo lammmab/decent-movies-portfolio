@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
+    "module": "commonjs",
     "target": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "nodenext",
-    "strict": true
-  }
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "strict": true,
+    "outDir": "dist",
+  },
+  "include": ["src/**/*"]
 }

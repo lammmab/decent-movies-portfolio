@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
-interface AppError extends Error {
+export interface AppError extends Error {
   status?: number;
 }
 
-const errorHandler = (
+export const errorHandler = (
   err: AppError,
   req: Request,
   res: Response,
@@ -15,7 +15,3 @@ const errorHandler = (
     message: err.message || 'Internal Server Error',
   });
 };
-
-module.exports = {
-    errorHandler
-}

@@ -1,4 +1,5 @@
 {
+    "debug": true,
     "port": 3000,
     "plugins_folder": "./plugins",
     "whitelisted": false,
