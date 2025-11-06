@@ -8,23 +8,23 @@
 
 <style>
     .searchbar {
-        width: 100%;             /* Full width or adjust as needed */
-        max-width: 400px;        /* Optional limit */
-        padding: 0.5rem 1rem;    /* Comfortable padding */
-        font-size: 1rem;         /* Readable text */
-        border: 1px solid #ccc;  /* Light border */
-        border-radius: 9999px;   /* Pill-shaped rounded edges */
-        outline: none;           /* Remove default focus outline */
-        transition: all 0.2s ease; /* Smooth hover/focus effects */
+        width: 100%;
+        max-width: 30vw;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 9999px;
+        outline: none;
+        transition: all 0.2s ease;
     }
 
     .searchbar:focus {
-        border-color: #007BFF;   /* Highlight on focus */
+        border-color: #007BFF;
         box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
     }
 
     .searchbar::placeholder {
-        color: #aaa;             /* Subtle placeholder color */
+        color: #aaa;
         font-style: italic;
     }  
 </style>

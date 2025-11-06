@@ -71,23 +71,30 @@
     }
 
     .topbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #080808;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #080808;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+      gap: 10px;
+    }
+
+    .left {
+      height: 100%;
+      align-content: center;
     }
 
     .center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+      position: absolute;
+      width: 25vw;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .center .searchbar {

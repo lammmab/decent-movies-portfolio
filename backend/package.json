@@ -1,19 +1,15 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "type": "commonjs",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "node src/server.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0"
   }
 }

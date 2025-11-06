@@ -17,3 +17,13 @@ export interface Title {
     type: TitleType;
     display_url: string;
 }
+
+export type Config = {
+    port: number;
+    plugins_dir: string;
+    whitelisted: boolean;
+    whitelist: string[] | null;
+    protected: boolean;
+    admin_passwords: string[] | null;
+    user_passwords: string[] | null;
+}

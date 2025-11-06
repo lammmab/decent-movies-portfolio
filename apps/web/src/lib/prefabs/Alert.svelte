@@ -42,25 +42,27 @@
         position: fixed;
         z-index: 9999;
 
+        top: 0;
         left: 50%;
-        transform: translate(-50%);
         border-radius: 10px;
         font-family: Arial;
         animation: slideIn 0.3s ease forwards;
+
+        transform: translate(-50%,-100%);
     }
 
     .alert.slide-out {
-    animation: slideOut 0.3s ease forwards;
+        animation: slideOut 0.3s ease forwards;
     }
 
     @keyframes slideIn {
-        from { transform: translate(-50%, -300%); }
-        to { transform: translate(-50%,-100%); }
+        from { transform: translate(-50%,-100%); }
+        to { transform: translate(-50%,50%); }
     }
 
     @keyframes slideOut {
-        from { transform: translate(-50%, -100%); }
-        to { transform: translate(-50%, -300%); }
+        from { transform: translate(-50%,50%); }
+        to { transform: translate(-50%,-100%); }
     }
 
     .alert.success {

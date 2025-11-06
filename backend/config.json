@@ -1,0 +1,16 @@
+{
+    "port": 3000,
+    "plugins_folder": "./plugins",
+    "whitelisted": false,
+    "whitelist": [
+        "example@gmail.com",
+        "whitelisted_user@gmail.com"
+    ],
+    "password_protected": true,
+    "admin_passwords": [
+        "ilovedogs123"
+    ],
+    "user_passwords": [
+        "password"
+    ]
+}
