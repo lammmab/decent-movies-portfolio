@@ -14,7 +14,7 @@
 </script>
 
 <main>
-<img class="logo" src="/images/wide_logo.png" />
+<img class="logo" src="/images/wide_logo.png" alt="Logo" />
 <hr>
 <h1>Log in</h1>
 <Form {fields} onSubmit={handleSubmit} />

@@ -1,22 +1,22 @@
-<script lang="ts">
-    import type {Option} from '$lib/constants.ts';
-    export let options: Option[];
-    export let displayed: boolean = false;    
-    export let offset: number = 0;
-
-    export function toggle() {
-        displayed = !displayed;
-    }
-</script>
-
-
-<div class="pulldown_menu" class:display={displayed} style="top:{offset}px;">
+<div class="pulldown_menu" bind:this={element} class:display={displayed} style="top:{offset}px;">
   {#each options as option}
     <button on:click={option.callback} class="option">
         {option.label}
     </button>
   {/each}
 </div>
+
+<script lang="ts">
+    import type {Option} from '$lib/constants.ts';
+    export let options: Option[];
+    export let displayed: boolean = false;    
+    export let offset: number = 0;
+
+    export let element: HTMLDivElement | null = null;
+    export function toggle() {
+        displayed = !displayed;
+    }
+</script>
 
 <style>
     .pulldown_menu {

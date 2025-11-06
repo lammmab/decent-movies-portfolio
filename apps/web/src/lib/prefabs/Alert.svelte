@@ -54,13 +54,13 @@
     }
 
     @keyframes slideIn {
-        from { transform: translate(-50%, -150%); }
-        to { transform: translate(-50%); }
+        from { transform: translate(-50%, -300%); }
+        to { transform: translate(-50%,-100%); }
     }
 
     @keyframes slideOut {
-        from { transform: translate(-50%); }
-        to { transform: translate(-50%, -150%); }
+        from { transform: translate(-50%, -100%); }
+        to { transform: translate(-50%, -300%); }
     }
 
     .alert.success {

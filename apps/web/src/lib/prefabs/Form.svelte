@@ -1,17 +1,17 @@
 <!-- src/lib/prefabs/Form.svelte -->
 <script lang="ts">
-  import type {Field} from "$lib/constants.ts";
-  export let fields: Field[] = [];
-  export let formData: Record<string, any> = {};
-  export let onSubmit: (data: Record<string, any>) => void = () => {};
+    import type {Field} from "$lib/constants.ts";
+    export let fields: Field[] = [];
+    export let formData: Record<string, any> = {};
+    export let onSubmit: (data: Record<string, any>) => void = () => {};
 
-  const handleChange = (e: Event, name: string) =>
-    (formData[name] = (e.target as HTMLInputElement).value);
+    const handleChange = (e: Event, name: string) =>
+        (formData[name] = (e.target as HTMLInputElement).value);
 
-  const handleSubmit = (e: Event) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
+    const handleSubmit = (e: Event) => {
+        e.preventDefault();
+        onSubmit(formData);
+    };
 </script>
 
 <form class="form" on:submit={handleSubmit}>
@@ -48,57 +48,60 @@
 </form>
 
 <style>
-  .form {
-    display: grid;
-    gap: .75rem;
-    max-width: 300px;
-    margin: auto;
-    padding: 1rem;
-    border-radius: .75rem;
-  }
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    font-size: .9rem;
-    margin-bottom: 10px;
-  }
+    .form {
+        display: grid;
+        gap: .75rem;
+        max-width: 300px;
+        margin: auto;
+        padding: 1rem;
+        border-radius: .75rem;
+    }
 
-  .label {
-    color: white;
-    font-family: 'NeoSansBlack';
-  }
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+        font-size: .9rem;
+        margin-bottom: 10px;
+    }
 
-  input, textarea, select {
-    padding: .5rem;
-    border: 1px solid #ccc;
-    border-radius: .5rem;
-    font-size: .9rem;
-    margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255,255,255,0.1);
-    font-family: 'NeoSansRegular';
-    color: white;
-  }
-  input:focus {
-    border-color: #ffffff;
-    outline: none;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  }
+    .label {
+        color: white;
+        font-family: 'NeoSansBlack';
+    }
 
-  button {
-    padding: .6rem;
-    border: none;
-    border-radius: .5rem;
-    background: #2563eb;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    width: 40%;
-    display: block;
-    margin: 0 auto;
-    scale: 1;
-    transition: scale 0.3s ease;
-  }
-  button:hover { scale: 1.1; background: #1e4fd1; }
+    input, textarea, select {
+        padding: .5rem;
+        border: 1px solid #ccc;
+        border-radius: .5rem;
+        font-size: .9rem;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255,255,255,0.1);
+        font-family: 'NeoSansRegular';
+        color: white;
+    }
+
+    input:focus {
+        border-color: #ffffff;
+        outline: none;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    button {
+        padding: .6rem;
+        border: none;
+        border-radius: .5rem;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        width: 40%;
+        display: block;
+        margin: 0 auto;
+        scale: 1;
+        transition: scale 0.3s ease;
+    }
+
+    button:hover { scale: 1.1; background: #1e4fd1; }
 </style>

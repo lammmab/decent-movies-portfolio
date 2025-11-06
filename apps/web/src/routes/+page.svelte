@@ -1,7 +1,14 @@
 <script lang="ts">
     import TitleCard from "$lib/prefabs/TitleCard.svelte";
-    import type {Field} from "$lib/constants.ts";
+    import type {Field,Title} from "$lib/constants.ts";
     import Form from '$lib/prefabs/Form.svelte';
+    import TitleRow from "$lib/prefabs/TitleRow.svelte";
+
+    const title: Title = {
+        title_name: "The Amazing World of Gumball",
+        type: 2,
+        display_url: "https://i0.wp.com/www.thewrap.com/wp-content/uploads/2021/09/The-Amazing-World-of-Gumball.jpg?fit=990%2C557&quality=89&ssl=1"
+    }
 
     const fields: Field[] = [
         { name: 'backend', label: 'BACKEND ADDRESS', placeholder: 'Enter an ip or url' },
@@ -20,37 +27,44 @@ the entry point of the site
 
 <main>
 <img class="logo" src="/images/wide_logo.png" alt="Logo" />
-<!--
-<TitleCard 
- info = {{
-    title_name: "Test Title",
-    type: 2,
-    display_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrT7oXKTplqRxYMZqclB1V4N0xJVSEU7zqBRdiU_tfu1BRhUrmUrnTnuWf66YQ8t_eEnaM-g&s=10"
-  }}
 
-/>
--->
 
 </main>
 
+<div class="home">
+    <TitleRow
+        row_label = "Jump back in"
+        titles = {[title,title,title,title,title,title,title,title,title,title,title,title,title,title,title]}
+    />
+    <TitleRow
+        row_label = "Another test"
+        titles = {[title,title,title,title,title,title,title,title,title,title,title,title,title,title,title]}
+    />
+</div>
+
+<!--
 <div class="backend">
     <Form {fields} onSubmit={handleSubmit} />
 </div>
+-->
 
 <style>
-  .logo {
-    display: block;
-    margin: 0 auto;
-    margin-top: calc(10vh);
-  }
+    .home {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* children keep their natural width */
+        min-height: calc(100vh - 100px);
+    }
 
-  h1 {
-    color: white;
-  }
+    .logo {
+        display: block;
+        margin: 0 auto;
+        margin-top: calc(10vh);
+    }
 
-  .backend {
-    display: block;
-    margin: 0 auto;
-    transform: translate(0,75%);
-  }
+    /*.backend {
+        display: block;
+        margin: 0 auto;
+        transform: translate(0,75%);
+    }*/
 </style>

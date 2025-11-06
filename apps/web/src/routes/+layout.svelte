@@ -1,5 +1,4 @@
 <script lang="ts">
-  export const ssr = false;
   
   import favicon from '$lib/assets/favicon.ico';
   import { onMount } from "svelte";
@@ -39,12 +38,12 @@
 
 <style>
   :global(html, body) {
+
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     background-color: rgb(36, 36, 36);
-    overflow: hidden;
   }
 </style>
 

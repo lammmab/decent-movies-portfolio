@@ -1,5 +1,5 @@
 <!-- src/lib/prefabs/Topbar.svelte -->
-
+<!-- on every page as per +layout.svelte -->
 <div class="topbar">
   {#if user}
     <button on:click={accountButton} class="account_button">
@@ -11,34 +11,34 @@
 </div>
 
 <Pulldown bind:this={pulldown} 
-  offset=60
+  offset={60}
   options={menuOptions}
 />
 
 <script lang="ts">
-  import type { User,Option } from '$lib/constants.ts';
-  import Pulldown from './Pulldown.svelte';
-  import { goto } from '$app/navigation';
+    import type { User,Option } from '$lib/constants.ts';
+    import Pulldown from './Pulldown.svelte';
+    import { goto } from '$app/navigation';
 
-  let pulldown: Pulldown
-  function log() {
-    console.log("Hi");
-  }
-
-  const menuOptions: Option[] = [
-		{ label: 'Backend Plugins', callback: log },
-		{ label: 'Settings', callback: log },
-		{ label: 'Log out', callback: log }
-	];
-
-  export let user: User | null = null;
-  function accountButton() {
-    if (user?.id != -1) {
-      pulldown.toggle()
-    } else {
-      goto("/authenticate")
+    let pulldown: Pulldown
+    function log() {
+        console.log("Hi");
     }
-  }
+
+    const menuOptions: Option[] = [
+        { label: 'Backend Plugins', callback: log },
+        { label: 'Settings', callback: log },
+        { label: 'Log out', callback: log }
+    ];
+
+    export let user: User | null = null;
+    function accountButton() {
+    if (user?.id == -1) {
+        pulldown.toggle();
+    } else {
+        goto("/authenticate");
+    }
+    }
 </script>
 
 
