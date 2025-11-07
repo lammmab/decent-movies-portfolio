@@ -13,5 +13,6 @@
     ],
     "user_passwords": [
         "password"
-    ]
+    ],
+    "session_duration": "4h"
 }

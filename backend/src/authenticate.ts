@@ -1,10 +1,10 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import {Request,Response,NextFunction} from 'express';
 import { AUTHROLE } from './constants';
 
 export function generate_token(isAdmin: boolean): string {
     const payload = { role: isAdmin ? AUTHROLE.ADMIN : AUTHROLE.USER };
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: CONFIG.session_duration as string } as SignOptions);
 
     return token;
 }

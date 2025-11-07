@@ -43,18 +43,16 @@ export type Option = {
     callback: (event: MouseEvent) => void;
 }
 
-export class Session {
+export type Session = {
   user: User;
   token: string;
   startedAt?: Date;
   expiresAt?: Date;
+}
 
-  constructor(user: User, token: string, time: Date, maxDuration: number) {
-    this.user = user;
-    this.token = token;
-    this.startedAt = time;
-    this.expiresAt = new Date(this.startedAt.getTime() + (maxDuration*1000));
-  }
+export type Backend = {
+  address: string;
+  token: string;
 }
 
 export function noUser() {
@@ -66,3 +64,4 @@ export function noUser() {
   }
   return user;
 }
+

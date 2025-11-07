@@ -30,19 +30,7 @@ export type Config = {
     whitelisted: boolean;
     whitelist: string[] | null;
     password_protected: boolean;
-    admin_passwords?: String[];
-    user_passwords?: String[];
-}
-
-export class Plugin {
-    name: string;
-    exports: Function[];
-    id: number;
-    disabled: boolean = false;
-    constructor(name: string, exports: Function[], id: number, disabled: boolean = false) {
-        this.name = name
-        this.exports = exports
-        this.id = id
-        this.disabled = disabled
-    }
+    admin_passwords?: string[];
+    user_passwords?: string[];
+    session_duration: string;
 }
