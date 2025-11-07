@@ -8,5 +8,5 @@ function route(req: Request,res: Response) {
     throw err;
 }
 
-export let error: Route = new Route('error',route)
+export let error: Route = new Route('error',route,true,'admin');
 

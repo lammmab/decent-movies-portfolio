@@ -1,6 +1,7 @@
 import {Request,Response,Express} from 'express';
 import fs from "fs";
 import path from "path";
+import { isAuthenticated,requireRole } from '../authenticate';
 
 /* 
 FolderRouter-
@@ -28,7 +29,18 @@ export class FolderRouter {
 
         this.routes.forEach(route => {
             info(`Routing /api/${route.name}`)
-            this.app.use(`/api/${route.name}`, route.resource);
+
+            if (route.protected) {
+                const middlewares = [isAuthenticated];
+                if (route.role) middlewares.push(requireRole(route.role));
+                this.app.use(
+                    `/api/${route.name}`,
+                    ...middlewares,
+                    route.resource
+                );
+            } else {
+                this.app.use(`/api/${route.name}`, route.resource);
+            }
         });
     }
 
@@ -60,13 +72,17 @@ export class FolderRouter {
 export class Route {
     name: string;
     resource: (req: Request,res: Response) => void;
+    protected?: boolean;
+    role?: "admin" | "user";
 
-    constructor(name: string, resource: (req: Request, res: Response) => void) {
-        this.name = name
-        this.resource = resource
+    constructor(name: string, resource: (req: Request, res: Response) => void, protect?: boolean, role?: "admin" | "user") {
+        this.name = name;
+        this.resource = resource;
+        this.protected = protect ?? false;
+        this.role = role;
     }
 
     call(req: Request, res: Response) {
-        this.resource(req,res)
+        this.resource(req,res);
     }
 }

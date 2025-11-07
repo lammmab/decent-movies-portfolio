@@ -24,7 +24,7 @@ export type Config = {
     plugins_dir: string;
     whitelisted: boolean;
     whitelist: string[] | null;
-    protected: boolean;
-    admin_passwords: string[] | null;
-    user_passwords: string[] | null;
+    password_protected: boolean;
+    admin_passwords?: String[];
+    user_passwords?: String[];
 }
