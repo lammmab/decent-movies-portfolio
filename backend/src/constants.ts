@@ -1,3 +1,8 @@
+export enum AUTHROLE {
+    ADMIN = 10,
+    USER = 1
+}
+
 enum AlertType {
     WARNING = "warn",
     SUCCESS = "success",
@@ -27,4 +32,17 @@ export type Config = {
     password_protected: boolean;
     admin_passwords?: String[];
     user_passwords?: String[];
+}
+
+export class Plugin {
+    name: string;
+    exports: Function[];
+    id: number;
+    disabled: boolean = false;
+    constructor(name: string, exports: Function[], id: number, disabled: boolean = false) {
+        this.name = name
+        this.exports = exports
+        this.id = id
+        this.disabled = disabled
+    }
 }

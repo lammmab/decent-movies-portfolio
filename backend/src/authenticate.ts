@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import {Request,Response,NextFunction} from 'express';
+import { AUTHROLE } from './constants';
 
 export function generate_token(isAdmin: boolean): string {
-    const payload = { role: isAdmin ? "admin" : "user" };
+    const payload = { role: isAdmin ? AUTHROLE.ADMIN : AUTHROLE.USER };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
     return token;
@@ -40,12 +41,12 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
     });
 }
 
-export function requireRole(role: "admin" | "user") {
+export function requireRole(role: AUTHROLE) {
     return (req: Request, res: Response, next: NextFunction) => {
         const user = (req as any).user;
         debug(`role required: ${role}; user role: ${user}`);
         if (!user) return res.status(401).json({ message: "Access denied" });
-        if (role && user.role !== role) {
+        if (user.role < role) {
             return res.status(403).json({ message: "Forbidden: insufficient permissions" });
         }
         next();

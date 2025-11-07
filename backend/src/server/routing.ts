@@ -2,6 +2,7 @@ import {Request,Response,Express} from 'express';
 import fs from "fs";
 import path from "path";
 import { isAuthenticated,requireRole } from '../authenticate';
+import { AUTHROLE } from '../constants';
 
 /* 
 FolderRouter-
@@ -73,9 +74,9 @@ export class Route {
     name: string;
     resource: (req: Request,res: Response) => void;
     protected?: boolean;
-    role?: "admin" | "user";
+    role?: AUTHROLE;
 
-    constructor(name: string, resource: (req: Request, res: Response) => void, protect?: boolean, role?: "admin" | "user") {
+    constructor(name: string, resource: (req: Request, res: Response) => void, protect?: boolean, role?: AUTHROLE) {
         this.name = name;
         this.resource = resource;
         this.protected = protect ?? false;
