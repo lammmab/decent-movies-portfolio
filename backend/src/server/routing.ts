@@ -1,7 +1,7 @@
 import {Request,Response,Express} from 'express';
 import fs from "fs";
 import path from "path";
-import { isAuthenticated,requireRole } from '../authenticate';
+import { is_authenticated,require_role } from '../authenticate';
 import { AUTHROLE } from '../constants';
 
 /* 
@@ -32,8 +32,8 @@ export class FolderRouter {
             info(`Routing /api/${route.name}`)
 
             if (route.protected) {
-                const middlewares = [isAuthenticated];
-                if (route.role) middlewares.push(requireRole(route.role));
+                const middlewares = [is_authenticated];
+                if (route.role) middlewares.push(require_role(route.role));
                 this.app.use(
                     `/api/${route.name}`,
                     ...middlewares,

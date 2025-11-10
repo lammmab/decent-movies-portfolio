@@ -27,7 +27,7 @@ export function check_details(password: string) {
     return null;
 }
 
-export function isAuthenticated(req: Request, res: Response, next: NextFunction) {
+export function is_authenticated(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
 
@@ -41,7 +41,7 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
     });
 }
 
-export function requireRole(role: AUTHROLE) {
+export function require_role(role: AUTHROLE) {
     return (req: Request, res: Response, next: NextFunction) => {
         const user = (req as any).user;
         debug(`role required: ${role}; user role: ${user}`);

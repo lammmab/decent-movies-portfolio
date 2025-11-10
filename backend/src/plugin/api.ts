@@ -27,11 +27,19 @@ interface Plugin {
     disabled: boolean;
     initialize(): void;
     
-    provideSearch(): Title[];
-    provideSources(): Source[];
-    provideHomepage(): TitleRow[];
+    provideSearch?(query: string): Promise<Title[]>;
+    provideSources?(title: string, season?: number, episode?: number): Promise<Source[]>;
+    provideHomepage?(): Promise<TitleRow[]>;
+    provideCC?(title: string, season?: number, episode?: number): Promise<string[]>;
 
     shutdown?(): void;
 }
 
-export { TitleType,Title,Plugin }
+function usable(p: Plugin,f?: keyof Plugin): boolean {
+    if (!p.disabled && f && typeof p[f] === 'function') {
+        return true;
+    }
+    return false
+}
+
+export { Source,TitleType,Title,Plugin,usable }
