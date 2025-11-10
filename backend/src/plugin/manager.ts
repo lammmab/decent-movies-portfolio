@@ -1,5 +1,7 @@
 import { Source,Title,Plugin,usable,valid_plugin } from "sdk";
 import path from 'path';
+import fs from 'fs';
+
 // TEST THIS MANAGER
 
 
@@ -73,9 +75,11 @@ export class PluginManager {
         }
     }
 
-    start_manager() {
-        // read CONFIG.plugins_dir and grab all JS files (relative to outward most directory (backend))
-        // run load plugin for each file
+    async start_manager() {
+        const files = fs.readdirSync(CONFIG.plugins_dir).filter(f => f.endsWith(".js"));
+        for (const file of files) {
+            await this.load_plugin(path.join(CONFIG.plugins_dir, file));
+        }
     }
 }
 
