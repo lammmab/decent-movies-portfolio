@@ -1,4 +1,7 @@
-import { Source,Plugin,usable } from "sdk";
+import { Source,Title,Plugin,usable,valid_plugin } from "sdk";
+import path from 'path';
+// TEST THIS MANAGER
+
 
 type AsyncPluginFunction<R = any> = (...args: any[]) => Promise<R[]>;
 
@@ -19,10 +22,10 @@ async function call_plugin_method<K extends keyof Plugin, R>(
             if (Array.isArray(pluginResult)) {
                 results.push(...pluginResult.filter(r => r != null));
             } else {
-                warn(`Plugin ${plugin.constructor.name}.${String(method)} returned non-array`);
+                warn(`Plugin ${plugin.name}.${String(method)} returned non-array`);
             }
         } catch (err) {
-            error(`Plugin ${plugin.constructor.name}.${String(method)} failed:`, err);
+            error(`Plugin ${plugin.name}.${String(method)} failed:`, err);
         }
     });
 
@@ -37,27 +40,41 @@ export class PluginManager {
     }
 
     async combined_sources(query: string, season?: number, episode?: number) {
-        const sources = await call_plugin_method(this.plugins,'provideSearch','test',1,1) // TEST LATER
+        // update later
     }
 
     async combined_search(query: string) {
-        // loop through plugins that provideSearch , return their search results or exclude
-        // if there's invalid stuff found
+        const results: Title[] = await call_plugin_method(this.plugins,'provideSearch','epic testing') // TEST LATER
+        for (const result of results) {
+            console.log(result.title_name)
+        } // update later
     }
 
     async load_plugin(filepath: string) {
-        // pull the plugin's exports
-        // verify that it is a plugin and map to a Plugin
-        // run initialization function
-        // add into this.plugins
+        const pluginModule = await import(path.resolve(filepath));
+        const plugin: Plugin = pluginModule.default ?? pluginModule;
+
+        if (!valid_plugin(plugin)) {
+            return;
+        }
+
+        if (typeof plugin.initialize === 'function') {
+            plugin.initialize();
+        }
+        this.plugins.push(plugin);
+        info(`Plugin ${plugin.name} loaded successfully.`)
     }
 
     toggle_plugin(plugin: Plugin) {
         plugin.disabled = !plugin.disabled;
+        const action = plugin.disabled ? "shutdown" : "initialize";
+        if (typeof plugin[action] === 'function') {
+            plugin[action]();
+        }
     }
 
     start_manager() {
-        // read CONFIG.plugins_dir and grab all JS files
+        // read CONFIG.plugins_dir and grab all JS files (relative to outward most directory (backend))
         // run load plugin for each file
     }
 }

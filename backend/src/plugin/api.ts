@@ -22,10 +22,8 @@ export interface TitleRow {
 
 interface Plugin {
     name: string;
-    exports: Function[];
-    id: number;
     disabled: boolean;
-    initialize(): void;
+    initialize?(): void;
     
     provideSearch?(query: string): Promise<Title[]>;
     provideSources?(title: string, season?: number, episode?: number): Promise<Source[]>;
@@ -42,4 +40,19 @@ function usable(p: Plugin,f?: keyof Plugin): boolean {
     return false
 }
 
-export { Source,TitleType,Title,Plugin,usable }
+function valid_plugin(p: Plugin): boolean {
+    if (!p.name) {
+        warn("Unnamed plugin found; rendered unusable.");
+        return false;
+    }
+
+    if (!p.provideSearch && !p.provideHomepage && !p.provideCC && !p.provideSources) {
+        warn("Plugin provides no useful functions; rendered unusable.");
+        return false;
+    }
+
+    return true;
+    
+}
+
+export { Source,TitleType,Title,Plugin,usable,valid_plugin }
