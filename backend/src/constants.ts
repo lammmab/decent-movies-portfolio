@@ -10,18 +10,8 @@ enum AlertType {
     INFORMATION = "info",
 }
 
-enum TitleType {
-    MOVIE = 1,
-    SHOW = 2
-}
 
-export { AlertType,TitleType }
-
-export interface Title {
-    title_name: string;
-    type: TitleType;
-    display_url: string;
-}
+export { AlertType }
 
 export type Config = {
     debug: boolean

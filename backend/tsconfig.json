@@ -5,8 +5,12 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "rootDir": "src",
-    "strict": true,
     "outDir": "dist",
+    "strict": true,
+    "baseUrl": ".", 
+    "paths": {
+      "sdk": ["src/plugin/api.ts"]
+    }
   },
   "include": ["src/**/*"]
 }
