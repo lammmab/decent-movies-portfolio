@@ -53,4 +53,8 @@
 
         border: none;
     }
+
+    .option:hover {
+        background-color: rgb(35, 35, 35);
+    }
 </style>

@@ -4,7 +4,7 @@
   <div class="left">
     {#if user}
       <button on:click={accountButton} class="account_button">
-        <img src={user.avatarUrl} alt="User Avatar" />
+        <img src={user.avatarUrl} alt="User Avatar" class="account-img" />
         <span class="userText">{user.name}</span>
       </button>
     {/if}
@@ -16,7 +16,9 @@
     
   </div>
   <div class="right">
-    <!-- optional right-side items -->
+    <a href="/">
+      <img src="images/home.png" class="home-img" alt="Home">
+    </a>
   </div>
 </div>
 
@@ -44,7 +46,7 @@
 
     export let user: User | null = null;
     function accountButton() {
-    if (user?.id == -1) {
+    if (user?.id != -1) {
         pulldown.toggle();
     } else {
         goto("/authenticate");
@@ -109,10 +111,17 @@
     }
 
     img {
-    border-radius: 50%;
-    margin-right: 10px;
     size: relative;
     width: 40px;
     height: auto;
+    }
+
+    .account-img {
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .home-img {
+      margin-right: 30px;
     }
 </style>

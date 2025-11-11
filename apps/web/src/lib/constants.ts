@@ -65,7 +65,7 @@ export enum SettingType {
 export function noUser() {
   let user: User = {
     id: -1,
-    name: 'Username',
+    name: 'Logged Out',
     email: 'none',
     avatarUrl: '/images/default_avatar.png'
   }
