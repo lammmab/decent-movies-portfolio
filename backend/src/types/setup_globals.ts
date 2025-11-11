@@ -4,6 +4,7 @@ import { loadEnvFile } from "process";
 export function setup() {
     loadEnvFile('./.env');
 
+    global.ROOT_DIR = process.cwd();
     global.CONFIG = config;
     global.DEBUG_ENABLED = config.debug ?? false;
 

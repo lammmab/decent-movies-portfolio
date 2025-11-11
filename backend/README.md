@@ -1,6 +1,6 @@
 # The decentralized backend for decent-movies-portfolio
 
-## If you haven't, check out (the main repo)[https://github.com/lammmab/decent-movies-portfolio]
+## If you haven't, check out [the main repo](https://github.com/lammmab/decent-movies-portfolio)
 
 ### Requirements:
 node.js

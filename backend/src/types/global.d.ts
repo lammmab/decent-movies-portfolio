@@ -4,6 +4,8 @@ declare global {
   var CONFIG: Config;
   var DEBUG_ENABLED: boolean;
   var JWT_SECRET: any;
+  var ROOT_DIR: string;
+
   var debug: (message: string, ...args: any[]) => void;
   var info: (message: string, ...args: any[]) => void;
   var warn: (message: string, ...args: any[]) => void;

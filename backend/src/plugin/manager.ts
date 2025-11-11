@@ -1,9 +1,14 @@
-import { Source,Title,Plugin,usable,valid_plugin } from "sdk";
+import { 
+    Source, 
+    Title, 
+    Plugin, 
+    usable, 
+    valid_plugin, 
+    TitleRow 
+} from "./api";
+
 import path from 'path';
 import fs from 'fs';
-
-// TEST THIS MANAGER
-
 
 type AsyncPluginFunction<R = any> = (...args: any[]) => Promise<R[]>;
 
@@ -27,7 +32,7 @@ async function call_plugin_method<K extends keyof Plugin, R>(
                 warn(`Plugin ${plugin.name}.${String(method)} returned non-array`);
             }
         } catch (err) {
-            error(`Plugin ${plugin.name}.${String(method)} failed:`, err);
+            error(`Plugin ${plugin.name}.${String(method)} failed: `, err);
         }
     });
 
@@ -36,20 +41,34 @@ async function call_plugin_method<K extends keyof Plugin, R>(
 }
 
 export class PluginManager {
-    plugins: Plugin[];
-    constructor(plugins: Plugin[]) {
-        this.plugins = plugins;
+    plugins: Plugin[] = [];
+    constructor() {};
+
+    async combined_homepage(): Promise<TitleRow[] | null> {
+        const full_page: TitleRow[] = await call_plugin_method(this.plugins,'provideHomepage');
+        if (full_page.length == 0) {
+            return null;
+        } else {
+            return full_page;
+        }
     }
 
-    async combined_sources(query: string, season?: number, episode?: number) {
-        // update later
+    async combined_sources(query: string, season?: number, episode?: number): Promise<Source[] | null> {
+        const results: Source[] = await call_plugin_method(this.plugins,'provideSources',query,season,episode);
+        if (results.length == 0) {
+            return null;
+        } else {
+            return results;
+        }
     }
 
-    async combined_search(query: string) {
-        const results: Title[] = await call_plugin_method(this.plugins,'provideSearch','epic testing') // TEST LATER
-        for (const result of results) {
-            console.log(result.title_name)
-        } // update later
+    async combined_search(query: string): Promise<Title[] | null> {
+        const results: Title[] = await call_plugin_method(this.plugins,'provideSearch',query)
+        if (results.length == 0) {
+            return null;
+        } else {
+            return results;
+        }
     }
 
     async load_plugin(filepath: string) {
@@ -69,6 +88,7 @@ export class PluginManager {
 
     toggle_plugin(plugin: Plugin) {
         plugin.disabled = !plugin.disabled;
+        info(`Plugin ${plugin.name} now ${plugin.disabled ? "disabled" : "enabled"}`)
         const action = plugin.disabled ? "shutdown" : "initialize";
         if (typeof plugin[action] === 'function') {
             plugin[action]();
@@ -76,10 +96,11 @@ export class PluginManager {
     }
 
     async start_manager() {
-        const files = fs.readdirSync(CONFIG.plugins_dir).filter(f => f.endsWith(".js"));
+        const chosen_folder = path.join(ROOT_DIR, CONFIG.plugins_dir);
+        const files = fs.readdirSync(chosen_folder).filter(f => f.endsWith(".js"));
         for (const file of files) {
+            info(`Loading plugin file ${file}`)
             await this.load_plugin(path.join(CONFIG.plugins_dir, file));
         }
     }
 }
-

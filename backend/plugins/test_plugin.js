@@ -7,7 +7,7 @@ module.exports = {
             { 
                 title_name: `Test Plugin Query Result For ${query}`,
                 type: 1,
-                url: "https://example.com"
+                display_url: "https://example.com"
             }
         ];
     }
