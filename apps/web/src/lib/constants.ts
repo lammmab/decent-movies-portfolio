@@ -55,6 +55,13 @@ export type Backend = {
   token: string;
 }
 
+export enum SettingType {
+  CHECKBOX = 1,
+  BUTTON = 2,
+  INPUT = 3,
+  DROPDOWN = 4,
+}
+
 export function noUser() {
   let user: User = {
     id: -1,
