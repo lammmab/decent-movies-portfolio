@@ -1,4 +1,5 @@
 <script>
+    import { SettingType } from "$lib/constants";
     import Setting from "$lib/prefabs/Setting.svelte";
 
 </script>
@@ -6,7 +7,10 @@
 <main>
 <img class="logo" src="/images/wide_logo.png" alt="Logo" />
 </main>
-<Setting></Setting>
+<Setting
+    name = {"test"}
+    type = {SettingType.BUTTON}
+></Setting>
 
 <style>
     .logo {
