@@ -59,7 +59,6 @@ the entry point of the site
     .logo {
         display: block;
         margin: 0 auto;
-        margin-top: calc(10vh);
     }
 
     /*.backend {

@@ -37,6 +37,8 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
+<div class="top-bound"></div>
+
 <style>
   :global(html, body) {
 
@@ -45,6 +47,11 @@
     height: 100%;
     width: 100%;
     background-color: rgb(36, 36, 36);
+  }
+
+  .top-bound {
+    width: 100%;
+    height: 60px;
   }
 </style>
 

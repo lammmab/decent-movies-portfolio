@@ -13,9 +13,7 @@
         console.log('Submitted: ', data);
 </script>
 
-<main>
-<img class="logo" src="/images/wide_logo.png" alt="Logo" />
-<hr>
+<main class="content">
 <h1>Log in</h1>
 <Form {fields} onSubmit={handleSubmit} />
 </main>
@@ -23,20 +21,15 @@
 
 
 <style>
-  .logo {
-    display: block;
-    margin: 0 auto;
-    margin-top: calc(10vh);
+  .content {
+    position: relative;
+    top: calc(50% - 60px);
+    transform: translateY(-50%);
   }
 
   h1 {
     color: white;
     text-align: center;
     font-family: 'NeoSansRegular';
-  }
-
-  hr {
-    border: none;
-    margin-top: 5%;
   }
 </style>
