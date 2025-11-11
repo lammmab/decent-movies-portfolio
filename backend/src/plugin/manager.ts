@@ -41,39 +41,22 @@ async function call_plugin_method<K extends keyof Plugin, R>(
 }
 
 export class PluginManager {
+    plugin_path = path.join(ROOT_DIR, CONFIG.plugins_dir);
     plugins: Plugin[] = [];
     constructor() {};
 
-    async combined_homepage(): Promise<TitleRow[] | null> {
-        const full_page: TitleRow[] = await call_plugin_method(this.plugins,'provideHomepage');
-        if (full_page.length == 0) {
-            return null;
-        } else {
-            return full_page;
-        }
-    }
-
-    async combined_sources(query: string, season?: number, episode?: number): Promise<Source[] | null> {
-        const results: Source[] = await call_plugin_method(this.plugins,'provideSources',query,season,episode);
-        if (results.length == 0) {
-            return null;
-        } else {
-            return results;
-        }
-    }
-
-    async combined_search(query: string): Promise<Title[] | null> {
-        const results: Title[] = await call_plugin_method(this.plugins,'provideSearch',query)
-        if (results.length == 0) {
-            return null;
-        } else {
-            return results;
-        }
+    async combined<K extends keyof Plugin, R>(
+        method: K,
+        ...args: Parameters<Plugin[K] & AsyncPluginFunction<R>>
+        ): Promise<R[] | null> {
+        const results: R[] = await call_plugin_method(this.plugins, method, ...args);
+        return results.length ? results : null;
     }
 
     async load_plugin(filepath: string) {
         const pluginModule = await import(path.resolve(filepath));
         const plugin: Plugin = pluginModule.default ?? pluginModule;
+        plugin.filepath = filepath;
 
         if (!valid_plugin(plugin)) {
             return;
@@ -86,6 +69,15 @@ export class PluginManager {
         info(`Plugin ${plugin.name} loaded successfully.`)
     }
 
+    delete_plugin(plugin: Plugin) {
+        if (!plugin.disabled) {
+            this.toggle_plugin(plugin);
+        }
+
+        this.plugins = this.plugins.filter(function(v) { return v !== plugin })
+        fs.unlinkSync(plugin.filepath!);
+    }
+
     toggle_plugin(plugin: Plugin) {
         plugin.disabled = !plugin.disabled;
         info(`Plugin ${plugin.name} now ${plugin.disabled ? "disabled" : "enabled"}`)
@@ -96,11 +88,10 @@ export class PluginManager {
     }
 
     async start_manager() {
-        const chosen_folder = path.join(ROOT_DIR, CONFIG.plugins_dir);
-        const files = fs.readdirSync(chosen_folder).filter(f => f.endsWith(".js"));
+        const files = fs.readdirSync(this.plugin_path).filter(f => f.endsWith(".js"));
         for (const file of files) {
             info(`Loading plugin file ${file}`)
-            await this.load_plugin(path.join(CONFIG.plugins_dir, file));
+            await this.load_plugin(path.join(this.plugin_path, file));
         }
     }
 }

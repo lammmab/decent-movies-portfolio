@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { is_authenticated,require_role } from '../authenticate';
 import { AUTHROLE } from '../constants';
+import { PluginManager } from 'src/plugin/manager';
 
 /* 
 FolderRouter-
@@ -15,33 +16,42 @@ constructor(folder_name: string, app: Express)
 3. sets up the app to use each api route
 
 */
+
+export type AppContext = {
+    manager: PluginManager;
+}
+
 export class FolderRouter {
     folder_name: string;
     path: string;
     
     app: Express;
     routes: Route[] = [];
-    constructor(folder_name: string, app: Express) {
+    ctx?: AppContext;
+
+    constructor(folder_name: string, app: Express, ctx?: AppContext) {
         this.folder_name = folder_name;
         this.path = path.join(__dirname,this.folder_name)
         this.app = app;
+        
+        this.ctx = ctx;
+        
         if (!fs.existsSync(this.path)) { throw new Error(`Routing path ${this.path} not found`) }
         this.routes = this.setupRoutes();
 
         this.routes.forEach(route => {
             info(`Routing /api/${route.name}`)
 
+            const middlewares = [];
             if (route.protected) {
-                const middlewares = [is_authenticated];
+                middlewares.push(is_authenticated);
                 if (route.role) middlewares.push(require_role(route.role));
-                this.app.use(
-                    `/api/${route.name}`,
-                    ...middlewares,
-                    route.resource
-                );
-            } else {
-                this.app.use(`/api/${route.name}`, route.resource);
             }
+            this.app.use(
+                `/api/${route.name}`,
+                ...middlewares,
+                (req,res) => route.call(req,res,this.ctx)
+            );
         });
     }
 
@@ -53,6 +63,7 @@ export class FolderRouter {
             const modulePath = path.join(this.path, file);
             try {
                 const mod = require(modulePath);
+
                 Object.values(mod).forEach(exported => {
                     if (exported instanceof Route) routes.push(exported);
                 });
@@ -72,7 +83,7 @@ export class FolderRouter {
 
 export class Route {
     name: string;
-    resource: (req: Request,res: Response) => void;
+    resource: (req: Request,res: Response, ctx?: AppContext) => void;
     protected?: boolean;
     role?: AUTHROLE;
 
@@ -83,7 +94,7 @@ export class Route {
         this.role = role;
     }
 
-    call(req: Request, res: Response) {
-        this.resource(req,res);
+    call(req: Request, res: Response, ctx?: AppContext) {
+        this.resource(req,res,ctx);
     }
 }

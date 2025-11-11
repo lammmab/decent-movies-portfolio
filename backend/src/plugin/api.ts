@@ -23,6 +23,7 @@ export interface TitleRow {
 interface Plugin {
     name: string;
     disabled: boolean;
+    filepath?: string;
     initialize?(): void;
     
     provideSearch?(query: string): Promise<Title[]>;

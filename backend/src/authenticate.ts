@@ -10,17 +10,13 @@ export function generate_token(isAdmin: boolean): string {
 }
 
 export function check_details(password: string) {
-    debug(password);
     if (CONFIG.admin_passwords?.includes(password)) {
-        debug(`Found ${password} in admin passwords`)
         return generate_token(true);
     }
     if (CONFIG.user_passwords?.includes(password)) {
-        debug(`Found ${password} in user passwords`)
         return generate_token(false);
     }
     if (!CONFIG.password_protected) {
-        debug(`Backend unprotected`)
         return generate_token(true);
     }
 
@@ -44,7 +40,6 @@ export function is_authenticated(req: Request, res: Response, next: NextFunction
 export function require_role(role: AUTHROLE) {
     return (req: Request, res: Response, next: NextFunction) => {
         const user = (req as any).user;
-        debug(`role required: ${role}; user role: ${user}`);
         if (!user) return res.status(401).json({ message: "Access denied" });
         if (user.role < role) {
             return res.status(403).json({ message: "Forbidden: insufficient permissions" });
