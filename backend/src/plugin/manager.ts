@@ -15,7 +15,7 @@ type AsyncPluginFunction<R = any> = (...args: any[]) => Promise<R[]>;
 async function call_plugin_method<K extends keyof Plugin, R>(
     plugins: Plugin[],
     method: K,
-    ...args: Parameters<Plugin[K] & AsyncPluginFunction<R>>
+    args: Parameters<Plugin[K] & AsyncPluginFunction<R>>
 ): Promise<R[]> {
     const results: R[] = [];
 
@@ -24,7 +24,7 @@ async function call_plugin_method<K extends keyof Plugin, R>(
 
         try {
             const fn = plugin[method]! as AsyncPluginFunction<R>;
-            const pluginResult = await fn(...args);
+            const pluginResult = await fn(args);
 
             if (Array.isArray(pluginResult)) {
                 results.push(...pluginResult.filter(r => r != null));
@@ -47,9 +47,9 @@ export class PluginManager {
 
     async combined<K extends keyof Plugin, R>(
         method: K,
-        ...args: Parameters<Plugin[K] & AsyncPluginFunction<R>>
+        args: Parameters<Plugin[K] & AsyncPluginFunction<R>>
         ): Promise<R[] | null> {
-        const results: R[] = await call_plugin_method(this.plugins, method, ...args);
+        const results: R[] = await call_plugin_method(this.plugins, method, args);
         return results.length ? results : null;
     }
 

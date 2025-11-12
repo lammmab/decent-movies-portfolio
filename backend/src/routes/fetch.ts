@@ -6,11 +6,6 @@ The main client access point of the backend
 Unpacks parameters passed into /api/fetch
 ?method=functionName
 &args=whatever
-
-PROBLEMS: currently matches based on order
-not actual names of parameters
-
-that is probably not ideal but will work for the time being
 */
 
 
@@ -22,11 +17,10 @@ async function fetch(req: Request,res: Response, ctx?: AppContext) {
     if (!ctx!.manager) {
         return res.status(404).json({ error: 'There is no plugin manager in the app context!' });
     }
-    const method = req.query.method as string;
-    const args = Object.values(req.query).filter((v, i) => i !== 0);
-
+    const { method, ...args } = req.body;
     try {
-        const result = await ctx!.manager.combined(method as any, ...args);
+
+        const result = await ctx!.manager.combined(method as any, args);
         if (!result) return res.status(404).json({ error: 'No results' });
         res.json(result);
     } catch (err) {
