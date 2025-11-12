@@ -1,4 +1,6 @@
 import {Request,Response,Express} from 'express';
+import cors from "cors";
+
 import fs from "fs";
 import path from "path";
 import { is_authenticated,require_role } from '../authenticate';

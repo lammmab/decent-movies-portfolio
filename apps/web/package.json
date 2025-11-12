@@ -21,6 +21,7 @@
 		"vite": "^7.1.10"
 	},
 	"dependencies": {
-		"@sveltejs/adapter-static": "^3.0.10"
+		"@sveltejs/adapter-static": "^3.0.10",
+		"node-fetch": "^3.3.2"
 	}
 }

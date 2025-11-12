@@ -3,6 +3,7 @@
     import type {Field,Title} from "$lib/constants.ts";
     import Form from '$lib/prefabs/Form.svelte';
     import TitleRow from "$lib/prefabs/TitleRow.svelte";
+    import { getClient } from "$lib/client";
 
     const title: Title = {
         title_name: "Amazing Title",
@@ -16,7 +17,7 @@
     ];
 
     const handleSubmit = (data: Record<string, any>) =>
-        console.log(data);
+        getClient().authenticate_backend(data.backend,data.password);
 </script>
 <!--
 +page.svelte
@@ -31,22 +32,21 @@ the entry point of the site
 
 </main>
 
+<div class="backend">
+    <Form {fields} onSubmit={handleSubmit} />
+</div>
+
 <div class="home">
-    <TitleRow
+<!--    <TitleRow
         row_label = "Jump back in"
         titles = {[title,title,title,title,title,title,title,title,title,title,title,title,title,title,title]}
     />
     <TitleRow
         row_label = "Another test"
         titles = {[title,title,title,title,title,title,title,title,title,title,title,title,title,title,title]}
-    />
+    /> -->
 </div>
 
-<!--
-<div class="backend">
-    <Form {fields} onSubmit={handleSubmit} />
-</div>
--->
 
 <style>
     .home {
@@ -61,9 +61,9 @@ the entry point of the site
         margin: 0 auto;
     }
 
-    /*.backend {
-        display: block;
-        margin: 0 auto;
-        transform: translate(0,75%);
-    }*/
+    .backend {
+        position: relative;
+        top: calc(50% - 60px);
+        transform: translateY(-50%);
+    }
 </style>

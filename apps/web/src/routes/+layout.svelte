@@ -17,8 +17,8 @@
   let user: User | null = $state(null);
 
   onMount(async () => {
-    isLoading = false;
     user = noUser();
+    isLoading = false;
   });
 </script>
 
